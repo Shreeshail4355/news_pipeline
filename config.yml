@@ -1,0 +1,21 @@
+database:
+  host: "db"
+  port: 5432
+  dbname: "newsdb"
+  user: "newsuser"
+  password: "newspassword"
+
+websites:
+  skift:
+    homeUrl: "https://skift.com/news/"
+    urls_path: "//article//h3[@class='c-tease__title']//a/@href"
+    html_paths_for_data:
+      title: "//head//meta[@property='og:title']/@content"
+      publication_timestamp: "//header[@class='t-single-news__header is-layout-flow']//time[@class='o-pretty-time']/@datetime"
+
+  phocuswire:
+    homeUrl: "https://www.phocuswire.com/Latest-News"
+    urls_path: "//div[@class='list-view ']//div[@class='category-img']//a[@data-feathr-click-track='true']/@href"
+    html_paths_for_data:
+      title: "//h1[@itemprop='mainEntityOfPage name']/span/text()"
+      publication_timestamp: "//span[@itemprop='datePublished']/@content"

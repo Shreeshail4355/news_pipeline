@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:13  # ✅ downgraded to match existing data
+    environment:
+      POSTGRES_DB: newsdb
+      POSTGRES_USER: newsuser
+      POSTGRES_PASSWORD: newspassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: newsdb
+      DB_USER: newsuser
+      DB_PASSWORD: newspassword
+    command: ["python", "main.py"]
+
+volumes:
+  postgres_data:
